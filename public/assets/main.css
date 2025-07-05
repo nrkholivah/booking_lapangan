@@ -1,0 +1,57 @@
+
+:root {
+    --bs-red: #dc3545; /* Merah standar Bootstrap */
+    --bs-red-rgb: 220,53,69;
+    /* Anda bisa mengganti dengan kode hex merah yang Anda inginkan, misalnya: #FF0000 */
+}
+
+.bg-danger {
+    background-color: var(--bs-red) !important;
+}
+
+.btn-danger {
+    background-color: var(--bs-red);
+    border-color: var(--bs-red);
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Warna merah sedikit lebih gelap saat hover */
+    border-color: #bd2130;
+}
+
+.table-danger th {
+    background-color: var(--bs-red) !important;
+    color: white !important;
+}
+
+.list-group-item.active.bg-danger {
+    background-color: var(--bs-red) !important;
+    border-color: var(--bs-red) !important;
+}
+
+/* Tambahan styling untuk card atau elemen lain jika diperlukan */
+.card-header.bg-danger {
+    background-color: var(--bs-red) !important;
+}
+
+/* Untuk konsistensi warna pada card info di dashboard admin */
+.card.bg-primary {
+    background-color: #0d6efd !important; /* Biru Bootstrap default */
+}
+.card.bg-success {
+    background-color: #198754 !important; /* Hijau Bootstrap default */
+}
+.card.bg-info {
+    background-color: #0dcaf0 !important; /* Biru muda Bootstrap default */
+}
+.card.bg-warning {
+    background-color: #ffc107 !important; /* Kuning Bootstrap default */
+}
+
+/* Pastikan warna teks kontras */
+.text-white {
+    color: #fff !important;
+}
+.text-dark {
+    color: #212529 !important;
+}
