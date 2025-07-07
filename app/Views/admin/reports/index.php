@@ -1,6 +1,7 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/admin') ?>
 
 <?= $this->section('content') ?>
+
 <div class="row">
     <div class="col-md-3">
         <?= $this->include('admin/sidebar') ?>
@@ -13,7 +14,7 @@
                 <h5 class="mb-0">Grafik Penggunaan Lapangan</h5>
             </div>
             <div class="card-body">
-                <canvas id="fieldUsageChart"></canvas>
+                <canvas id="lapanganUsageChart"></canvas>
             </div>
         </div>
 
@@ -21,60 +22,29 @@
             <div class="card-header bg-danger text-white">
                 <h5 class="mb-0">Laporan Semua Booking</h5>
             </div>
-            <div class="card-body">
-                <?php if (empty($all_bookings)): ?>
-                    <p class="text-center">Belum ada data booking untuk laporan.</p>
-                <?php else: ?>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered">
-                            <thead class="table-danger text-white">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Pengguna</th>
-                                    <th>Lapangan</th>
-                                    <th>Tanggal</th>
-                                    <th>Waktu</th>
-                                    <th>Total Harga</th>
-                                    <th>Pembayaran</th>
-                                    <th>Status Booking</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($all_bookings as $booking): ?>
-                                    <tr>
-                                        <td><?= esc($booking['id']) ?></td>
-                                        <td><?= esc($booking['username']) ?></td>
-                                        <td><?= esc($booking['field_name']) ?></td>
-                                        <td><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></td>
-                                        <td><?= esc(date('H:i', strtotime($booking['start_time']))) ?> - <?= esc(date('H:i', strtotime($booking['end_time']))) ?></td>
-                                        <td>Rp<?= number_format($booking['total_price'], 0, ',', '.') ?></td>
-                                        <td><span class="badge bg-<?= ($booking['payment_status'] == 'approved') ? 'success' : (($booking['payment_status'] == 'pending') ? 'warning text-dark' : 'danger') ?>"><?= esc(ucfirst($booking['payment_status'])) ?></span></td>
-                                        <td><span class="badge bg-<?= ($booking['booking_status'] == 'approved') ? 'success' : (($booking['booking_status'] == 'pending') ? 'secondary' : 'danger') ?>"><?= esc(ucfirst($booking['booking_status'])) ?></span></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+            <div class="card-body text-center">
+                <a href="<?= base_url('admin/reports/download') ?>" class="btn btn-danger">
+                    <i class="bi bi-download"></i> Download Laporan PDF
+                </a>
             </div>
         </div>
+
     </div>
 </div>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const fieldNames = <?= $field_names ?>;
+        const lapanganNames = <?= $lapangan_names ?>; // Changed from fieldNames
         const bookingCounts = <?= $booking_counts ?>;
 
-        const ctx = document.getElementById('fieldUsageChart').getContext('2d');
+        const ctx = document.getElementById('lapanganUsageChart').getContext('2d'); // Changed from fieldUsageChart
         new Chart(ctx, {
             type: 'bar', // Bisa diganti 'line', 'pie', dll.
             data: {
-                labels: fieldNames,
+                labels: lapanganNames, // Changed from fieldNames
                 datasets: [{
                     label: 'Jumlah Booking',
                     data: bookingCounts,

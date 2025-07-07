@@ -1,6 +1,4 @@
 <?php
-// app/Controllers/Admin/Bookings.php
-// Controller untuk manajemen booking dan persetujuan pembayaran oleh admin.
 
 namespace App\Controllers\Admin;
 
@@ -14,7 +12,7 @@ class Bookings extends BaseController
     public function __construct()
     {
         $this->bookingModel = new BookingModel();
-        helper(['form', 'url', 'filesystem']);
+    
     }
 
     public function index()
@@ -51,7 +49,7 @@ class Bookings extends BaseController
 
         $data = [
             'payment_status' => 'approved',
-            'booking_status' => 'approved', // Booking juga diset approved
+            'booking_status' => 'approved', 
             'admin_notes'    => $this->request->getPost('admin_notes'),
         ];
 
@@ -72,7 +70,7 @@ class Bookings extends BaseController
 
         $data = [
             'payment_status' => 'rejected',
-            'booking_status' => 'rejected', // Booking juga diset rejected
+            'booking_status' => 'rejected',
             'admin_notes'    => $this->request->getPost('admin_notes'),
         ];
 

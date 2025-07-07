@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/admin') ?>
 
 <?= $this->section('content') ?>
 <div class="row">
@@ -21,7 +21,7 @@
                 <div class="card text-white bg-success shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-futbol"></i> Total Lapangan</h5>
-                        <p class="card-text fs-3"><?= esc($total_fields) ?></p>
+                        <p class="card-text fs-3"><?= esc($total_lapangan) ?></p>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                                     <tr>
                                         <td><?= esc($booking['id']) ?></td>
                                         <td><?= esc($booking['username']) ?></td>
-                                        <td><?= esc($booking['field_name']) ?></td>
+                                        <td><?= esc($booking['lapangan_name']) ?></td>
                                         <td><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></td>
                                         <td><?= esc(date('H:i', strtotime($booking['start_time']))) ?> - <?= esc(date('H:i', strtotime($booking['end_time']))) ?></td>
                                         <td><span class="badge bg-<?= ($booking['payment_status'] == 'approved') ? 'success' : (($booking['payment_status'] == 'pending') ? 'warning text-dark' : 'danger') ?>"><?= esc(ucfirst($booking['payment_status'])) ?></span></td>
@@ -89,4 +89,3 @@
     </div>
 </div>
 <?= $this->endSection() ?>
-

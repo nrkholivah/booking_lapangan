@@ -7,21 +7,19 @@ use App\Models\LapanganModel;
 
 class Lapangan extends BaseController
 {
-    protected $LapanganModel;
-
+    protected $lapanganModel;
     public function __construct()
     {
-        $this->LapanganModel = new LapanganModel();
-        helper(['form', 'url', 'filesystem']);
+        $this->lapanganModel = new LapanganModel();
     }
 
     public function index()
     {
         $data = [
             'title'  => 'Manajemen Lapangan',
-            'fields' => $this->LapanganModel->findAll(),
+            'lapangan' => $this->lapanganModel->findAll(), 
         ];
-        return view('admin/fields/index', $data);
+        return view('admin/lapangan/index', $data); 
     }
 
     public function create()
@@ -29,7 +27,7 @@ class Lapangan extends BaseController
         $data = [
             'title' => 'Tambah Lapangan Baru',
         ];
-        return view('admin/fields/form', $data);
+        return view('admin/lapangan/form', $data); 
     }
 
     public function store()
@@ -50,8 +48,8 @@ class Lapangan extends BaseController
         $file = $this->request->getFile('image');
         if ($file && $file->isValid() && ! $file->hasMoved()) {
             $imageName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads/fields', $imageName);
-            $imageName = 'uploads/fields/' . $imageName; // Path relatif untuk database
+            $file->move(ROOTPATH . 'image/lapangan', $imageName); 
+            $imageName = 'image/lapangan/' . $imageName; 
         }
 
         $data = [
@@ -62,8 +60,8 @@ class Lapangan extends BaseController
             'status'         => $this->request->getPost('status'),
         ];
 
-        if ($this->LapanganModel->insert($data)) {
-            return redirect()->to(base_url('admin/fields'))->with('success', 'Lapangan berhasil ditambahkan.');
+        if ($this->lapanganModel->insert($data)) { 
+            return redirect()->to(base_url('admin/lapangan'))->with('success', 'Lapangan berhasil ditambahkan.');
         } else {
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan lapangan.');
         }
@@ -71,23 +69,23 @@ class Lapangan extends BaseController
 
     public function edit($id = null)
     {
-        $field = $this->LapanganModel->find($id);
+        $lapangan = $this->lapanganModel->find($id); 
 
-        if (! $field) {
+        if (! $lapangan) { 
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Lapangan tidak ditemukan: ' . $id);
         }
 
         $data = [
-            'title' => 'Edit Lapangan: ' . $field['name'],
-            'field' => $field,
+            'title' => 'Edit Lapangan: ' . $lapangan['name'], 
+            'lapangan' => $lapangan, 
         ];
-        return view('admin/fields/form', $data);
+        return view('admin/lapangan/form', $data); 
     }
 
     public function update($id = null)
     {
-        $field = $this->LapanganModel->find($id);
-        if (! $field) {
+        $lapangan = $this->lapanganModel->find($id); 
+        if (! $lapangan) { 
             return redirect()->back()->with('error', 'Lapangan tidak ditemukan.');
         }
 
@@ -103,16 +101,16 @@ class Lapangan extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $imageName = $field['image']; // Ambil nama gambar lama
+        $imageName = $lapangan['image'];
         $file = $this->request->getFile('image');
         if ($file && $file->isValid() && ! $file->hasMoved()) {
-            // Hapus gambar lama jika ada
+          
             if ($imageName && file_exists(ROOTPATH . 'public/' . $imageName)) {
                 unlink(ROOTPATH . 'public/' . $imageName);
             }
             $imageName = $file->getRandomName();
-            $file->move(ROOTPATH . 'public/uploads/fields', $imageName);
-            $imageName = 'uploads/fields/' . $imageName;
+            $file->move(ROOTPATH . 'image/lapangan', $imageName);
+            $imageName = 'image/lapangan/' . $imageName; 
         }
 
         $data = [
@@ -123,27 +121,26 @@ class Lapangan extends BaseController
             'status'         => $this->request->getPost('status'),
         ];
 
-        if ($this->LapanganModel->update($id, $data)) {
-            return redirect()->to(base_url('admin/fields'))->with('success', 'Lapangan berhasil diperbarui.');
-        } else {
+        if ($this->lapanganModel->update($id, $data)) { 
+            return redirect()->to(base_url('admin/lapangan'))->with('success', 'Lapangan berhasil diperbarui.'); 
             return redirect()->back()->withInput()->with('error', 'Gagal memperbarui lapangan.');
         }
     }
 
     public function delete($id = null)
     {
-        $field = $this->LapanganModel->find($id);
-        if (! $field) {
+        $lapangan = $this->lapanganModel->find($id); 
+        if (! $lapangan) { 
             return redirect()->back()->with('error', 'Lapangan tidak ditemukan.');
         }
 
-        // Hapus gambar terkait jika ada
-        if ($field['image'] && file_exists(ROOTPATH . 'public/' . $field['image'])) {
-            unlink(ROOTPATH . 'public/' . $field['image']);
+       
+        if ($lapangan['image'] && file_exists(ROOTPATH . 'public/' . $lapangan['image'])) { 
+            unlink(ROOTPATH . 'public/' . $lapangan['image']); 
         }
 
-        if ($this->LapanganModel->delete($id)) {
-            return redirect()->to(base_url('admin/fields'))->with('success', 'Lapangan berhasil dihapus.');
+        if ($this->lapanganModel->delete($id)) { 
+            return redirect()->to(base_url('admin/lapangan'))->with('success', 'Lapangan berhasil dihapus.'); 
         } else {
             return redirect()->back()->with('error', 'Gagal menghapus lapangan.');
         }

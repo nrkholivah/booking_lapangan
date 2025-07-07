@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/admin') ?>
 
 <?= $this->section('content') ?>
 <div class="row">
@@ -33,7 +33,7 @@
                             <tr>
                                 <td><?= esc($booking['id']) ?></td>
                                 <td><?= esc($booking['username']) ?></td>
-                                <td><?= esc($booking['field_name']) ?></td>
+                                <td><?= esc($booking['lapangan_name']) ?></td>
                                 <td><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></td>
                                 <td><?= esc(date('H:i', strtotime($booking['start_time']))) ?> - <?= esc(date('H:i', strtotime($booking['end_time']))) ?></td>
                                 <td>Rp<?= number_format($booking['total_price'], 0, ',', '.') ?></td>

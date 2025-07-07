@@ -1,3 +1,4 @@
+<!-- app/Views/admin/bookings/detail.php -->
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
@@ -15,10 +16,11 @@
             <div class="card-body">
                 <dl class="row">
                     <dt class="col-sm-3">Pengguna:</dt>
-                    <dd class="col-sm-9"><?= esc($booking['username']) ?> (<?= esc($booking['email']) ?>)</dd>
+                    <!-- Perubahan di baris ini: menampilkan username dan no_hp -->
+                    <dd class="col-sm-9"><?= esc($booking['username']) ?> (<?= esc($booking['no_hp']) ?>)</dd>
 
                     <dt class="col-sm-3">Lapangan:</dt>
-                    <dd class="col-sm-9"><?= esc($booking['field_name']) ?></dd>
+                    <dd class="col-sm-9"><?= esc($booking['lapangan_name']) ?></dd>
 
                     <dt class="col-sm-3">Tanggal Booking:</dt>
                     <dd class="col-sm-9"><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></dd>
@@ -107,34 +109,16 @@
                 <h5 class="mb-0">Aksi Admin</h5>
             </div>
             <div class="card-body">
-                <?php if ($booking['payment_status'] == 'paid' || $booking['payment_status'] == 'pending'): ?>
-                    <p><strong>Catatan Admin:</strong></p>
-                    <?= form_open(base_url('admin/bookings/approve-payment/' . $booking['id']), ['class' => 'mb-3']) ?>
-                    <div class="mb-3">
-                        <textarea name="admin_notes" class="form-control" rows="3" placeholder="Tambahkan catatan admin (opsional)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success me-2" onclick="return confirm('Setujui pembayaran ini dan konfirmasi booking?');"><i class="fas fa-check-circle"></i> Setujui Pembayaran</button>
-                    <?= form_close() ?>
-
-                    <?= form_open(base_url('admin/bookings/reject-payment/' . $booking['id']), ['class' => 'mb-3']) ?>
-                    <div class="mb-3">
-                        <textarea name="admin_notes" class="form-control" rows="3" placeholder="Tambahkan alasan penolakan (wajib jika menolak)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tolak pembayaran ini dan batalkan booking?');"><i class="fas fa-times-circle"></i> Tolak Pembayaran</button>
-                    <?= form_close() ?>
-                <?php else: ?>
-                    <p class="text-muted">Pembayaran sudah <?= esc($booking['payment_status']) ?>.</p>
-                <?php endif; ?>
-
                 <?php if ($booking['booking_status'] != 'cancelled' && $booking['booking_status'] != 'completed'): ?>
-                    <hr>
                     <p><strong>Batalkan Booking:</strong></p>
                     <?= form_open(base_url('admin/bookings/cancel-booking/' . $booking['id'])) ?>
                     <div class="mb-3">
                         <textarea name="admin_notes" class="form-control" rows="3" placeholder="Alasan pembatalan (opsional)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Apakah Anda yakin ingin membatalkan booking ini?');"><i class="fas fa-ban"></i> Batalkan Booking</button>
+                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Apakah Anda yakin ingin membatalkan booking ini? Ini juga akan menolak pembayaran terkait.');"><i class="fas fa-ban"></i> Batalkan Booking</button>
                     <?= form_close() ?>
+                <?php else: ?>
+                    <p class="text-muted">Tidak ada aksi yang tersedia untuk booking ini karena statusnya sudah <?= esc(ucfirst($booking['booking_status'])) ?>.</p>
                 <?php endif; ?>
             </div>
         </div>

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/user') ?>
 
 <?= $this->section('content') ?>
 <h1 class="mb-4">Booking Saya</h1>
@@ -26,7 +26,7 @@
                 <?php foreach ($bookings as $booking): ?>
                     <tr>
                         <td><?= esc($booking['id']) ?></td>
-                        <td><?= esc($booking['field_name']) ?></td>
+                        <td><?= esc($booking['lapangan_name']) ?></td>
                         <td><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></td>
                         <td><?= esc(date('H:i', strtotime($booking['start_time']))) ?> - <?= esc(date('H:i', strtotime($booking['end_time']))) ?></td>
                         <td>Rp<?= number_format($booking['total_price'], 0, ',', '.') ?></td>
@@ -78,7 +78,6 @@
                                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#uploadPaymentModal<?= $booking['id'] ?>">
                                     Upload Bukti Bayar
                                 </button>
-                                <!-- Modal Upload Bukti Pembayaran -->
                                 <div class="modal fade" id="uploadPaymentModal<?= $booking['id'] ?>" tabindex="-1" aria-labelledby="uploadPaymentModalLabel<?= $booking['id'] ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

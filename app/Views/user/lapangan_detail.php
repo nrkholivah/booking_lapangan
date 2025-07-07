@@ -1,29 +1,25 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/user') ?>
 
 <?= $this->section('content') ?>
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <div class="card shadow-sm mt-4">
             <div class="card-header bg-danger text-white">
-                <h4 class="mb-0">Detail Lapangan: <?= esc($field['name']) ?></h4>
+                <h4 class="mb-0">Detail Lapangan: <?= esc($lapangan['name']) ?></h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <?php if ($field['image']): ?>
-                            <img src="<?= base_url($field['image']) ?>" class="img-fluid rounded mb-3" alt="<?= esc($field['name']) ?>">
-                        <?php else: ?>
+                        <?php if ($lapangan['image']): ?> <img src="<?= base_url($lapangan['image']) ?>" class="img-fluid rounded mb-3" alt="<?= esc($lapangan['name']) ?>"> <?php else: ?>
                             <img src="https://placehold.co/600x400/FF0000/FFFFFF?text=No+Image" class="img-fluid rounded mb-3" alt="No Image">
                         <?php endif; ?>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Deskripsi:</strong> <?= esc($field['description']) ?></p>
-                        <p><strong>Harga:</strong> Rp<?= number_format($field['price_per_hour'], 0, ',', '.') ?> / jam</p>
+                        <p><strong>Deskripsi:</strong> <?= esc($lapangan['description']) ?></p>
+                        <p><strong>Harga:</strong> Rp<?= number_format($lapangan['price_per_hour'], 0, ',', '.') ?> / jam</p>
                         <p><strong>Status:</strong>
-                            <?php if ($field['status'] == 'available'): ?>
-                                <span class="badge bg-success">Tersedia</span>
-                            <?php elseif ($field['status'] == 'maintenance'): ?>
-                                <span class="badge bg-warning text-dark">Perawatan</span>
+                            <?php if ($lapangan['status'] == 'available'): ?> <span class="badge bg-success">Tersedia</span>
+                            <?php elseif ($lapangan['status'] == 'maintenance'): ?> <span class="badge bg-warning text-dark">Perawatan</span>
                             <?php else: ?>
                                 <span class="badge bg-danger">Tidak Tersedia</span>
                             <?php endif; ?>
@@ -33,10 +29,9 @@
 
                 <hr>
 
-                <?php if ($field['status'] == 'available'): ?>
-                    <h5>Booking Lapangan Ini</h5>
+                <?php if ($lapangan['status'] == 'available'): ?> <h5>Booking Lapangan Ini</h5>
                     <?= form_open(base_url('booking/create')) ?>
-                    <input type="hidden" name="field_id" value="<?= esc($field['id']) ?>">
+                    <input type="hidden" name="lapangan_id" value="<?= esc($lapangan['id']) ?>">
                     <div class="mb-3">
                         <label for="booking_date" class="form-label">Tanggal Booking</label>
                         <input type="date" class="form-control" id="booking_date" name="booking_date" required min="<?= date('Y-m-d') ?>">

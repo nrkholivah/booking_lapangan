@@ -5,15 +5,15 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
-use App\Models\LapanganModel;
+use App\Models\LapanganModel; // Changed from FieldModel
 
 class Home extends BaseController
 {
-    protected $LapanganModel;
+    protected $lapanganModel; // Changed from fieldModel
 
     public function __construct()
     {
-        $this->LapanganModel = new LapanganModel();
+        $this->lapanganModel = new LapanganModel(); // Changed from FieldModel
         helper(['form', 'url']);
     }
 
@@ -21,23 +21,23 @@ class Home extends BaseController
     {
         $data = [
             'title'  => 'Daftar Lapangan',
-            'fields' => $this->LapanganModel->findAll(),
+            'lapangans' => $this->lapanganModel->findAll(), // Changed from fields
         ];
         return view('user/home', $data);
     }
 
     public function detail($id = null)
     {
-        $field = $this->LapanganModel->find($id);
+        $lapangan = $this->lapanganModel->find($id); // Changed from field
 
-        if (! $field) {
+        if (! $lapangan) { // Changed from field
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Lapangan tidak ditemukan: ' . $id);
         }
 
         $data = [
-            'title' => 'Detail Lapangan: ' . $field['name'],
-            'field' => $field,
+            'title' => 'Detail Lapangan: ' . $lapangan['name'], // Changed from field
+            'lapangan' => $lapangan, // Changed from field
         ];
-        return view('user/detail_lapangan', $data);
+        return view('user/lapangan_detail', $data); // Changed from field_detail
     }
 }

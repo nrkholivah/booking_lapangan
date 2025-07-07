@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/user') ?>
 
 <?= $this->section('content') ?>
 <div class="row justify-content-center">

@@ -47,7 +47,7 @@ class CreateTables extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('users');
 
-        // Tabel Fields (Lapangan)
+        // Tabel Lapangan
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
@@ -87,7 +87,7 @@ class CreateTables extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->createTable('fields');
+        $this->forge->createTable('lapangan');
 
         // Tabel Bookings (Pemesanan)
         $this->forge->addField([
@@ -102,7 +102,7 @@ class CreateTables extends Migration
                 'constraint' => 5,
                 'unsigned'   => true,
             ],
-            'field_id' => [
+            'lapangan_id' => [
                 'type'       => 'INT',
                 'constraint' => 5,
                 'unsigned'   => true,
@@ -150,14 +150,14 @@ class CreateTables extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('field_id', 'fields', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('lapangan_id', 'lapangan', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('bookings');
     }
 
     public function down()
     {
         $this->forge->dropTable('bookings');
-        $this->forge->dropTable('fields');
+        $this->forge->dropTable('lapangan');
         $this->forge->dropTable('users');
     }
 }

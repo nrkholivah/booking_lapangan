@@ -1,49 +1,65 @@
 <?php
-// app/Controllers/Admin/Reports.php
-// Controller untuk laporan dan grafik oleh admin.
 
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\BookingModel;
 use App\Models\LapanganModel;
-
+use Dompdf\Dompdf; 
 class Reports extends BaseController
 {
     protected $bookingModel;
-    protected $LapanganModel;
-
+    protected $lapanganModel; 
     public function __construct()
     {
         $this->bookingModel = new BookingModel();
-        $this->LapanganModel = new LapanganModel();
+        $this->lapanganModel = new LapanganModel(); 
     }
-
     public function index()
     {
-        // Data untuk grafik penggunaan lapangan
-        $fieldUsageData = $this->bookingModel
-            ->select('fields.name as field_name, COUNT(bookings.id) as total_bookings')
-            ->join('fields', 'fields.id = bookings.field_id')
-            ->groupBy('fields.name')
+        
+        $lapanganUsageData = $this->bookingModel 
+            ->select('lapangan.name as lapangan_name, COUNT(bookings.id) as total_bookings')
+            ->join('lapangan', 'lapangan.id = bookings.lapangan_id') 
+            ->groupBy('lapangan.name') 
             ->findAll();
 
-        $fieldNames = [];
+        $lapanganNames = []; 
         $bookingCounts = [];
-        foreach ($fieldUsageData as $data) {
-            $fieldNames[] = $data['field_name'];
+        foreach ($lapanganUsageData as $data) { 
+            $lapanganNames[] = $data['lapangan_name']; 
             $bookingCounts[] = $data['total_bookings'];
         }
 
-        // Data untuk laporan daftar booking (contoh sederhana)
+       
         $allBookings = $this->bookingModel->getBookingDetails();
 
         $data = [
             'title'         => 'Laporan & Grafik',
-            'field_names'   => json_encode($fieldNames), // Untuk Chart.js
+            'lapangan_names'   => json_encode($lapanganNames), // Untuk Chart.js 
             'booking_counts' => json_encode($bookingCounts), // Untuk Chart.js
             'all_bookings'  => $allBookings,
         ];
         return view('admin/reports/index', $data);
     }
+
+public function download()
+{
+    $bookingModel = new \App\Models\BookingModel();
+    $bookings = $bookingModel->getBookingDetails();
+
+    $data = [
+        'title' => 'Laporan Semua Booking',
+        'bookings' => $bookings,
+    ];
+
+    $html = view('admin/reports/laporan_pdf', $data);
+
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->render();
+    $dompdf->stream('laporan-booking-' . date('YmdHis') . '.pdf', ['Attachment' => true]);
+}
+
 }

@@ -1,6 +1,4 @@
 <?php
-// app/Models/FieldModel.php
-// Model untuk tabel 'fields'.
 
 namespace App\Models;
 
@@ -16,7 +14,7 @@ class LapanganModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['name', 'description', 'price_per_hour', 'image', 'status'];
 
-    // Dates
+    // Date
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

@@ -8,15 +8,15 @@ use CodeIgniter\Model;
 
 class BookingModel extends Model
 {
-    protected $table = 'bookings';
-    protected $primaryKey = 'id';
+    protected $table            = 'bookings';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType = 'array';
-    protected $useSoftDeletes = false;
-    protected $protectFields = true;
-    protected $allowedFields = [
+    protected $returnType       = 'array';
+    protected $useSoftDeletes   = false;
+    protected $protectFields    = true;
+    protected $allowedFields    = [
         'user_id',
-        'field_id',
+        'lapangan_id',
         'booking_date',
         'start_time',
         'end_time',
@@ -29,25 +29,25 @@ class BookingModel extends Model
 
     // Dates
     protected $useTimestamps = true;
-    protected $dateFormat = 'datetime';
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
     // Validation
     protected $validationRules = [
-        'user_id' => 'required|integer',
-        'field_id' => 'required|integer',
-        'booking_date' => 'required|valid_date',
-        'start_time' => 'required', // Format HH:MM:SS
-        'end_time' => 'required', // Format HH:MM:SS
-        'total_price' => 'required|numeric|greater_than[0]',
+        'user_id'        => 'required|integer',
+        'lapangan_id'        => 'required|integer',
+        'booking_date'   => 'required|valid_date',
+        'start_time'     => 'required', // Format HH:MM:SS
+        'end_time'       => 'required', // Format HH:MM:SS
+        'total_price'    => 'required|numeric|greater_than[0]',
         'payment_status' => 'in_list[pending,paid,approved,rejected]',
         'booking_status' => 'in_list[pending,approved,rejected,completed,cancelled]',
-        'payment_proof' => 'permit_empty|max_length[255]',
-        'admin_notes' => 'permit_empty|max_length[500]',
+        'payment_proof'  => 'permit_empty|max_length[255]',
+        'admin_notes'    => 'permit_empty|max_length[500]',
     ];
     protected $validationMessages = [];
-    protected $skipValidation = false;
+    protected $skipValidation     = false;
     protected $cleanValidationRules = true;
 
     /**
@@ -58,9 +58,9 @@ class BookingModel extends Model
      */
     public function getBookingDetails($id = null)
     {
-        $this->select('bookings.*, users.username, users.email, fields.name as field_name, fields.price_per_hour');
+        $this->select('bookings.*, users.username, users.email, lapangan.name as lapangan_name, lapangan.price_per_hour');
         $this->join('users', 'users.id = bookings.user_id');
-        $this->join('fields', 'fields.id = bookings.field_id');
+        $this->join('lapangan', 'lapangan.id = bookings.lapangan_id');
 
         if ($id) {
             return $this->find($id);
@@ -72,16 +72,16 @@ class BookingModel extends Model
     /**
      * Mengecek ketersediaan lapangan pada waktu tertentu.
      *
-     * @param int $fieldId
+     * @param int $lapanganId
      * @param string $bookingDate (Y-m-d)
      * @param string $startTime (H:i:s)
      * @param string $endTime (H:i:s)
      * @param int|null $excludeBookingId (untuk edit booking)
      * @return bool
      */
-    public function isFieldAvailable(int $fieldId, string $bookingDate, string $startTime, string $endTime, ?int $excludeBookingId = null): bool
+    public function isLapanganAvailable(int $lapanganId, string $bookingDate, string $startTime, string $endTime, ?int $excludeBookingId = null): bool
     {
-        $query = $this->where('field_id', $fieldId)
+        $query = $this->where('lapangan_id', $lapanganId)
             ->where('booking_date', $bookingDate)
             ->where('booking_status !=', 'cancelled') // Jangan cek booking yang dibatalkan
             ->groupStart()

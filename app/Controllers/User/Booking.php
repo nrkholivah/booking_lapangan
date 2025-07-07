@@ -4,27 +4,26 @@
 
 namespace App\Controllers\User;
 
-use App\Controllers\Admin\Lapangan;
 use App\Controllers\BaseController;
 use App\Models\BookingModel;
-use App\Models\LapanganModel;
+use App\Models\LapanganModel; // Changed from FieldModel
 
 class Booking extends BaseController
 {
     protected $bookingModel;
-    protected $LapanganModel;
+    protected $lapanganModel; // Changed from fieldModel
 
     public function __construct()
     {
         $this->bookingModel = new BookingModel();
-        $this->LapanganModel = new LapanganModel();
+        $this->lapanganModel = new LapanganModel(); // Changed from FieldModel
         helper(['form', 'url', 'filesystem']);
     }
 
     public function create()
     {
         $rules = [
-            'field_id'     => 'required|integer',
+            'lapangan_id'    => 'required|integer', // Changed from field_id
             'booking_date' => 'required|valid_date',
             'start_time'   => 'required',
             'end_time'     => 'required',
@@ -34,18 +33,18 @@ class Booking extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $fieldId = $this->request->getPost('field_id');
+        $lapanganId = $this->request->getPost('lapangan_id'); // Changed from fieldId
         $bookingDate = $this->request->getPost('booking_date');
         $startTime = $this->request->getPost('start_time');
         $endTime = $this->request->getPost('end_time');
 
-        $field = $this->LapanganModel->find($fieldId);
-        if (! $field) {
+        $lapangan = $this->lapanganModel->find($lapanganId); // Changed from field
+        if (! $lapangan) { // Changed from field
             return redirect()->back()->with('error', 'Lapangan tidak ditemukan.');
         }
 
         // Cek ketersediaan lapangan
-        if (! $this->bookingModel->isFieldAvailable($fieldId, $bookingDate, $startTime, $endTime)) {
+        if (! $this->bookingModel->isLapanganAvailable($lapanganId, $bookingDate, $startTime, $endTime)) { // Changed from isFieldAvailable
             return redirect()->back()->withInput()->with('error', 'Lapangan tidak tersedia pada jam tersebut.');
         }
 
@@ -53,11 +52,11 @@ class Booking extends BaseController
         $start = strtotime($startTime);
         $end = strtotime($endTime);
         $durationHours = ($end - $start) / 3600; // Durasi dalam jam
-        $totalPrice = $durationHours * $field['price_per_hour'];
+        $totalPrice = $durationHours * $lapangan['price_per_hour']; // Changed from field
 
         $data = [
             'user_id'      => session()->get('user_id'),
-            'field_id'     => $fieldId,
+            'lapangan_id'      => $lapanganId, // Changed from fieldId
             'booking_date' => $bookingDate,
             'start_time'   => $startTime,
             'end_time'     => $endTime,

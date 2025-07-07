@@ -1,8 +1,8 @@
 
 :root {
-    --bs-red: #dc3545; /* Merah standar Bootstrap */
+    --bs-red: #dc3545; 
     --bs-red-rgb: 220,53,69;
-    /* Anda bisa mengganti dengan kode hex merah yang Anda inginkan, misalnya: #FF0000 */
+    
 }
 
 .bg-danger {
@@ -15,7 +15,7 @@
 }
 
 .btn-danger:hover {
-    background-color: #c82333; /* Warna merah sedikit lebih gelap saat hover */
+    background-color: #c82333; 
     border-color: #bd2130;
 }
 
@@ -29,29 +29,74 @@
     border-color: var(--bs-red) !important;
 }
 
-/* Tambahan styling untuk card atau elemen lain jika diperlukan */
+
 .card-header.bg-danger {
     background-color: var(--bs-red) !important;
 }
 
-/* Untuk konsistensi warna pada card info di dashboard admin */
+
 .card.bg-primary {
-    background-color: #0d6efd !important; /* Biru Bootstrap default */
+    background-color: #0d6efd !important; 
 }
 .card.bg-success {
-    background-color: #198754 !important; /* Hijau Bootstrap default */
+    background-color: #198754 !important; 
 }
 .card.bg-info {
-    background-color: #0dcaf0 !important; /* Biru muda Bootstrap default */
+    background-color: #0dcaf0 !important; 
 }
 .card.bg-warning {
-    background-color: #ffc107 !important; /* Kuning Bootstrap default */
+    background-color: #ffc107 !important; 
 }
 
-/* Pastikan warna teks kontras */
+
 .text-white {
     color: #fff !important;
 }
 .text-dark {
     color: #212529 !important;
 }
+/* admin-report.css */
+
+.card-header.bg-danger {
+    background-color: #dc3545 !important;
+    color: white;
+}
+
+.card-body.text-center a.btn-danger {
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+h1.mb-4 {
+    font-weight: 600;
+    color: #333;
+}
+
+canvas#lapanganUsageChart {
+    max-width: 100%;
+    margin-top: 20px;
+}
+ body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }

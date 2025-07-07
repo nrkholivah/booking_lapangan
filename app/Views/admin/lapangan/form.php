@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/admin') ?>
 
 <?= $this->section('content') ?>
 <div class="row">
@@ -10,37 +10,34 @@
 
         <div class="card shadow-sm">
             <div class="card-body">
-                <?= form_open_multipart(isset($field) ? base_url('admin/fields/update/' . $field['id']) : base_url('admin/fields/store')) ?>
-                <div class="mb-3">
+                <?= form_open_multipart(isset($lapangan) ? base_url('admin/lapangan/update/' . $lapangan['id']) : base_url('admin/lapangan/store')) ?> <div class="mb-3">
                     <label for="name" class="form-label">Nama Lapangan</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name', $field['name'] ?? '') ?>" required>
+                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name', $lapangan['name'] ?? '') ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="description" name="description" rows="3"><?= old('description', $field['description'] ?? '') ?></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3"><?= old('description', $lapangan['description'] ?? '') ?></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="price_per_hour" class="form-label">Harga per Jam</label>
-                    <input type="number" step="0.01" class="form-control" id="price_per_hour" name="price_per_hour" value="<?= old('price_per_hour', $field['price_per_hour'] ?? '') ?>" required>
+                    <input type="number" step="0.01" class="form-control" id="price_per_hour" name="price_per_hour" value="<?= old('price_per_hour', $lapangan['price_per_hour'] ?? '') ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Gambar Lapangan</label>
                     <input class="form-control" type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
-                    <?php if (isset($field) && $field['image']): ?>
-                        <small class="form-text text-muted">Gambar saat ini: <a href="<?= base_url($field['image']) ?>" target="_blank">Lihat Gambar</a></small>
-                    <?php endif; ?>
+                    <?php if (isset($lapangan) && $lapangan['image']): ?> <small class="form-text text-muted">Gambar saat ini: <a href="<?= base_url($lapangan['image']) ?>" target="_blank">Lihat Gambar</a></small> <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" id="status" name="status" required>
-                        <option value="available" <?= (isset($field) && $field['status'] == 'available') ? 'selected' : '' ?>>Tersedia</option>
-                        <option value="maintenance" <?= (isset($field) && $field['status'] == 'maintenance') ? 'selected' : '' ?>>Perawatan</option>
-                        <option value="unavailable" <?= (isset($field) && $field['status'] == 'unavailable') ? 'selected' : '' ?>>Tidak Tersedia</option>
+                        <option value="available" <?= (isset($lapangan) && $lapangan['status'] == 'available') ? 'selected' : '' ?>>Tersedia</option>
+                        <option value="maintenance" <?= (isset($lapangan) && $lapangan['status'] == 'maintenance') ? 'selected' : '' ?>>Perawatan</option>
+                        <option value="unavailable" <?= (isset($lapangan) && $lapangan['status'] == 'unavailable') ? 'selected' : '' ?>>Tidak Tersedia</option>
                     </select>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-danger">Simpan</button>
-                    <a href="<?= base_url('admin/fields') ?>" class="btn btn-secondary">Batal</a>
+                    <a href="<?= base_url('admin/lapangan') ?>" class="btn btn-secondary">Batal</a>
                 </div>
                 <?= form_close() ?>
             </div>

@@ -1,6 +1,4 @@
 <?php
-// app/Controllers/Auth.php
-// Controller untuk otentikasi (login, register, logout).
 
 namespace App\Controllers;
 
@@ -29,7 +27,7 @@ class Auth extends Controller
     {
         $rules = [
             'email'    => 'required|valid_email',
-            'password' => 'required|min_length[6]',
+            'password' => 'required',
         ];
 
         if (! $this->validate($rules)) {
@@ -73,9 +71,9 @@ class Auth extends Controller
     public function attemptRegister()
     {
         $rules = [
-            'username' => 'required|min_length[3]|max_length[50]',
+            'username' => 'required',
             'email'    => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[6]',
+            'password' => 'required',
             'pass_confirm' => 'required_with[password]|matches[password]',
         ];
 
@@ -86,7 +84,7 @@ class Auth extends Controller
         $data = [
             'username' => $this->request->getPost('username'),
             'email'    => $this->request->getPost('email'),
-            'password' => $this->request->getPost('password'), // Password akan di-hash oleh model
+            'password' => $this->request->getPost('password'),
             'role'     => 'user', // Default role adalah user
         ];
 
