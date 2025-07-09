@@ -51,18 +51,27 @@ class Booking extends BaseController
         // Hitung total harga
         $start = strtotime($startTime);
         $end = strtotime($endTime);
+<<<<<<< HEAD
         $durationHours = ($end - $start) / 3600; // Durasi dalam jam
         $totalPrice = $durationHours * $lapangan['price_per_hour']; // Changed from field
 
         $data = [
             'user_id'      => session()->get('user_id'),
             'lapangan_id'      => $lapanganId, // Changed from fieldId
+=======
+        $durationHours = ($end - $start) / 3600;
+        $totalPrice = $durationHours * $lapangan['price_per_hour'];
+
+        $data = [
+            'user_id'      => session()->get('user_id'),
+            'lapangan_id'      => $lapanganId,
+>>>>>>> f15f568 (first commit)
             'booking_date' => $bookingDate,
             'start_time'   => $startTime,
             'end_time'     => $endTime,
             'total_price'  => $totalPrice,
-            'payment_status' => 'pending',
-            'booking_status' => 'pending',
+            'payment_status' => 'Menunggu Konfirmasi',
+            'booking_status' => 'Menunggu Konfirmasi',
         ];
 
         if ($this->bookingModel->insert($data)) {
@@ -107,7 +116,7 @@ class Booking extends BaseController
 
             $data = [
                 'payment_proof'  => 'uploads/payments/' . $newName,
-                'payment_status' => 'paid', // Status berubah menjadi 'paid' setelah upload bukti
+                'payment_status' => 'Sudah Dibayar',
             ];
 
             if ($this->bookingModel->update($bookingId, $data)) {

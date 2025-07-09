@@ -26,7 +26,7 @@ class LapanganModel extends Model
         'description'    => 'permit_empty|max_length[500]',
         'price_per_hour' => 'required|numeric|greater_than[0]',
         'image'          => 'permit_empty|max_length[255]',
-        'status'         => 'in_list[available,maintenance,unavailable]',
+        'status'         => 'in_list[Tersedia,Perawatan,Penuh]',
     ];
     protected $validationMessages = [];
     protected $skipValidation     = false;

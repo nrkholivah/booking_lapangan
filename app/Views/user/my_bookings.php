@@ -34,16 +34,16 @@
                             <?php
                             $paymentStatusClass = '';
                             switch ($booking['payment_status']) {
-                                case 'pending':
+                                case 'Menunggu Konfirmasi':
                                     $paymentStatusClass = 'badge bg-warning text-dark';
                                     break;
-                                case 'paid':
+                                case 'Sudah Dibayar':
                                     $paymentStatusClass = 'badge bg-info text-dark';
                                     break;
-                                case 'approved':
+                                case 'Disetujui':
                                     $paymentStatusClass = 'badge bg-success';
                                     break;
-                                case 'rejected':
+                                case 'Ditolak':
                                     $paymentStatusClass = 'badge bg-danger';
                                     break;
                             }
@@ -54,19 +54,19 @@
                             <?php
                             $bookingStatusClass = '';
                             switch ($booking['booking_status']) {
-                                case 'pending':
+                                case 'Menunggu Konfirmasi':
                                     $bookingStatusClass = 'badge bg-secondary';
                                     break;
-                                case 'approved':
+                                case 'Disetujui':
                                     $bookingStatusClass = 'badge bg-success';
                                     break;
-                                case 'rejected':
+                                case 'Ditolak':
                                     $bookingStatusClass = 'badge bg-danger';
                                     break;
-                                case 'completed':
+                                case 'Selesai':
                                     $bookingStatusClass = 'badge bg-primary';
                                     break;
-                                case 'cancelled':
+                                case 'Dibatalkan':
                                     $bookingStatusClass = 'badge bg-dark';
                                     break;
                             }
@@ -74,7 +74,7 @@
                             <span class="<?= $bookingStatusClass ?>"><?= esc(ucfirst($booking['booking_status'])) ?></span>
                         </td>
                         <td>
-                            <?php if ($booking['payment_status'] == 'pending'): ?>
+                            <?php if ($booking['payment_status'] == 'Menunggu Konfirmasi'): ?>
                                 <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#uploadPaymentModal<?= $booking['id'] ?>">
                                     Upload Bukti Bayar
                                 </button>
@@ -87,16 +87,17 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>Total yang harus dibayar: <strong>Rp<?= number_format($booking['total_price'], 0, ',', '.') ?></strong></p>
-                                                <p>Silakan transfer ke rekening: **[Nama Bank] - [Nomor Rekening] A.N. [Nama Pemilik Rekening]**</p>
-                                                <?= form_open_multipart(base_url('booking/upload-payment/' . $booking['id'])) ?>
-                                                <div class="mb-3">
-                                                    <label for="payment_proof" class="form-label">Pilih File Bukti Pembayaran (JPG/PNG, maks 2MB)</label>
-                                                    <input class="form-control" type="file" id="payment_proof" name="payment_proof" accept=".jpg, .jpeg, .png" required>
-                                                </div>
-                                                <div class="d-grid">
-                                                    <button type="submit" class="btn btn-danger">Unggah Bukti</button>
-                                                </div>
-                                                <?= form_close() ?>
+                                                <p>Silakan transfer ke rekening: BCA - 0000000000 A.N. Lapanganku</p>
+                                                <form action="<?= base_url('booking/upload-payment/' . $booking['id']) ?>" method="post" enctype="multipart/form-data">
+                                                    <?= csrf_field() ?>
+                                                    <div class="mb-3">
+                                                        <label for="payment_proof" class="form-label">Pilih File Bukti Pembayaran (JPG/PNG, maks 2MB)</label>
+                                                        <input class="form-control" type="file" id="payment_proof" name="payment_proof" accept=".jpg, .jpeg, .png" required>
+                                                    </div>
+                                                    <div class="d-grid">
+                                                        <button type="submit" class="btn btn-danger">Unggah Bukti</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

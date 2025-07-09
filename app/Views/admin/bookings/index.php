@@ -41,16 +41,16 @@
                                     <?php
                                     $paymentStatusClass = '';
                                     switch ($booking['payment_status']) {
-                                        case 'pending':
+                                        case 'Menunngu Konfirmasi':
                                             $paymentStatusClass = 'badge bg-warning text-dark';
                                             break;
-                                        case 'paid':
+                                        case 'Sudah Dibayar':
                                             $paymentStatusClass = 'badge bg-info text-dark';
                                             break;
-                                        case 'approved':
+                                        case 'Disetujui':
                                             $paymentStatusClass = 'badge bg-success';
                                             break;
-                                        case 'rejected':
+                                        case 'Ditolak':
                                             $paymentStatusClass = 'badge bg-danger';
                                             break;
                                     }
@@ -61,19 +61,19 @@
                                     <?php
                                     $bookingStatusClass = '';
                                     switch ($booking['booking_status']) {
-                                        case 'pending':
+                                        case 'Menunggu Konfirmasi':
                                             $bookingStatusClass = 'badge bg-secondary';
                                             break;
-                                        case 'approved':
+                                        case 'Disetujui':
                                             $bookingStatusClass = 'badge bg-success';
                                             break;
-                                        case 'rejected':
+                                        case 'Ditolak':
                                             $bookingStatusClass = 'badge bg-danger';
                                             break;
-                                        case 'completed':
+                                        case 'Selesai':
                                             $bookingStatusClass = 'badge bg-primary';
                                             break;
-                                        case 'cancelled':
+                                        case 'Dibatalkan':
                                             $bookingStatusClass = 'badge bg-dark';
                                             break;
                                     }

@@ -23,10 +23,17 @@
                         </p>
                         <p class="card-text">
                             <strong>Status:</strong>
+<<<<<<< HEAD
                             <?php if ($lapangan['status'] == 'available'): ?> <span class="badge bg-success">Tersedia</span>
                             <?php elseif ($lapangan['status'] == 'maintenance'): ?> <span class="badge bg-warning text-dark">Perawatan</span>
+=======
+                            <?php if ($lapangan['status'] == 'Tersedia'): ?>
+                                <span class="badge bg-success">Tersedia</span>
+                            <?php elseif ($lapangan['status'] == 'Perawatan'): ?>
+                                <span class="badge bg-warning text-dark">Perawatan</span>
+>>>>>>> f15f568 (first commit)
                             <?php else: ?>
-                                <span class="badge bg-danger">Tidak Tersedia</span>
+                                <span class="badge bg-danger">Penuh</span>
                             <?php endif; ?>
                         </p>
                         <div class="mt-auto">

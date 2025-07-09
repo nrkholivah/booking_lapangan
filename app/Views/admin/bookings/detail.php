@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <!-- app/Views/admin/bookings/detail.php -->
 <?= $this->extend('layout/main') ?>
+=======
+<?= $this->extend('layout/admin') ?>
+>>>>>>> f15f568 (first commit)
 
 <?= $this->section('content') ?>
 <div class="row">
@@ -14,6 +18,7 @@
                 <h5 class="mb-0">Informasi Booking</h5>
             </div>
             <div class="card-body">
+<<<<<<< HEAD
                 <dl class="row">
                     <dt class="col-sm-3">Pengguna:</dt>
                     <!-- Perubahan di baris ini: menampilkan username dan no_hp -->
@@ -36,58 +41,77 @@
 
                     <dt class="col-sm-3">Status Pembayaran:</dt>
                     <dd class="col-sm-9">
+=======
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Pengguna</div>
+                    <div class="col-sm-8"><?= esc($booking['username']) ?> (<?= esc($booking['email']) ?>)</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">No. HP</div>
+                    <div class="col-sm-8"><?= esc($booking['no_hp']) ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Lapangan</div>
+                    <div class="col-sm-8"><?= esc($booking['lapangan_name']) ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Tanggal Booking</div>
+                    <div class="col-sm-8"><?= esc(date('d M Y', strtotime($booking['booking_date']))) ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Waktu Booking</div>
+                    <div class="col-sm-8"><?= esc(date('H:i', strtotime($booking['start_time']))) ?> - <?= esc(date('H:i', strtotime($booking['end_time']))) ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Harga per Jam</div>
+                    <div class="col-sm-8">Rp<?= number_format($booking['price_per_hour'], 0, ',', '.') ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Total Harga</div>
+                    <div class="col-sm-8"><strong>Rp<?= number_format($booking['total_price'], 0, ',', '.') ?></strong></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Status Pembayaran</div>
+                    <div class="col-sm-8">
+>>>>>>> f15f568 (first commit)
                         <?php
-                        $paymentStatusClass = '';
-                        switch ($booking['payment_status']) {
-                            case 'pending':
-                                $paymentStatusClass = 'badge bg-warning text-dark';
-                                break;
-                            case 'paid':
-                                $paymentStatusClass = 'badge bg-info text-dark';
-                                break;
-                            case 'approved':
-                                $paymentStatusClass = 'badge bg-success';
-                                break;
-                            case 'rejected':
-                                $paymentStatusClass = 'badge bg-danger';
-                                break;
-                        }
+                        $paymentStatusClass = match ($booking['payment_status']) {
+                            'Menunggu Konfirmasi' => 'badge bg-warning text-dark',
+                            'Sudah Dibayar'    => 'badge bg-info text-dark',
+                            'Disetujui' => 'badge bg-success',
+                            'Ditolak' => 'badge bg-danger',
+                            default   => 'badge bg-secondary'
+                        };
                         ?>
                         <span class="<?= $paymentStatusClass ?>"><?= esc(ucfirst($booking['payment_status'])) ?></span>
-                    </dd>
-
-                    <dt class="col-sm-3">Status Booking:</dt>
-                    <dd class="col-sm-9">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Status Booking</div>
+                    <div class="col-sm-8">
                         <?php
-                        $bookingStatusClass = '';
-                        switch ($booking['booking_status']) {
-                            case 'pending':
-                                $bookingStatusClass = 'badge bg-secondary';
-                                break;
-                            case 'approved':
-                                $bookingStatusClass = 'badge bg-success';
-                                break;
-                            case 'rejected':
-                                $bookingStatusClass = 'badge bg-danger';
-                                break;
-                            case 'completed':
-                                $bookingStatusClass = 'badge bg-primary';
-                                break;
-                            case 'cancelled':
-                                $bookingStatusClass = 'badge bg-dark';
-                                break;
-                        }
+                        $bookingStatusClass = match ($booking['booking_status']) {
+                            'Menunggu Konfirmasi'   => 'badge bg-secondary',
+                            'Disetujui'  => 'badge bg-success',
+                            'Ditolak'  => 'badge bg-danger',
+                            'Selesai' => 'badge bg-primary',
+                            'Dibatalkan' => 'badge bg-dark',
+                            default     => 'badge bg-light'
+                        };
                         ?>
                         <span class="<?= $bookingStatusClass ?>"><?= esc(ucfirst($booking['booking_status'])) ?></span>
-                    </dd>
-
-                    <dt class="col-sm-3">Dibuat Pada:</dt>
-                    <dd class="col-sm-9"><?= esc(date('d M Y H:i', strtotime($booking['created_at']))) ?></dd>
-
-                    <dt class="col-sm-3">Terakhir Diperbarui:</dt>
-                    <dd class="col-sm-9"><?= esc(date('d M Y H:i', strtotime($booking['updated_at']))) ?></dd>
-                </dl>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Dibuat Pada</div>
+                    <div class="col-sm-8"><?= esc(date('d M Y H:i', strtotime($booking['created_at']))) ?></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-4 fw-bold">Terakhir Diperbarui</div>
+                    <div class="col-sm-8"><?= esc(date('d M Y H:i', strtotime($booking['updated_at']))) ?></div>
+                </div>
             </div>
+
         </div>
 
         <div class="card shadow-sm mb-4">
@@ -109,8 +133,33 @@
                 <h5 class="mb-0">Aksi Admin</h5>
             </div>
             <div class="card-body">
+<<<<<<< HEAD
+=======
+                <?php if ($booking['payment_status'] == 'Sudah Dibayar' || $booking['payment_status'] == 'Menunggu Konfirmasi'): ?>
+                    <p><strong>Catatan Admin:</strong></p>
+                    <form action="<?= base_url('admin/bookings/approve-payment/' . $booking['id']) ?>" method="post" class="mb-3">
+                        <?= csrf_field() ?>
+                        <div class="mb-3">
+                            <textarea name="admin_notes" class="form-control" rows="3" placeholder="Tambahkan catatan admin (opsional)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success me-2" onclick="return confirm('Setujui pembayaran ini dan konfirmasi booking?');"><i class="fas fa-check-circle"></i> Setujui Pembayaran</button>
+                    </form>
+
+                    <form action="<?= base_url('admin/bookings/reject-payment/' . $booking['id']) ?>" method="post" class="mb-3">
+                        <?= csrf_field() ?>
+                        <div class="mb-3">
+                            <textarea name="admin_notes" class="form-control" rows="3" placeholder="Tambahkan alasan penolakan (wajib jika menolak)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tolak pembayaran ini dan batalkan booking?');"><i class="fas fa-times-circle"></i> Tolak Pembayaran</button>
+                    </form>
+                <?php else: ?>
+                    <p class="text-muted">Pembayaran sudah <?= esc($booking['payment_status']) ?>.</p>
+                <?php endif; ?>
+
+>>>>>>> f15f568 (first commit)
                 <?php if ($booking['booking_status'] != 'cancelled' && $booking['booking_status'] != 'completed'): ?>
                     <p><strong>Batalkan Booking:</strong></p>
+<<<<<<< HEAD
                     <?= form_open(base_url('admin/bookings/cancel-booking/' . $booking['id'])) ?>
                     <div class="mb-3">
                         <textarea name="admin_notes" class="form-control" rows="3" placeholder="Alasan pembatalan (opsional)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
@@ -119,6 +168,15 @@
                     <?= form_close() ?>
                 <?php else: ?>
                     <p class="text-muted">Tidak ada aksi yang tersedia untuk booking ini karena statusnya sudah <?= esc(ucfirst($booking['booking_status'])) ?>.</p>
+=======
+                    <form action="<?= base_url('admin/bookings/cancel-booking/' . $booking['id']) ?>" method="post">
+                        <?= csrf_field() ?>
+                        <div class="mb-3">
+                            <textarea name="admin_notes" class="form-control" rows="3" placeholder="Alasan pembatalan (opsional)"><?= esc($booking['admin_notes'] ?? '') ?></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" onclick="return confirm('Apakah Anda yakin ingin membatalkan booking ini?');"><i class="fas fa-ban"></i> Batalkan Booking</button>
+                    </form>
+>>>>>>> f15f568 (first commit)
                 <?php endif; ?>
             </div>
         </div>

@@ -4,7 +4,34 @@
 <head>
     <meta charset="utf-8">
     <title><?= $title ?></title>
+<<<<<<< HEAD
    
+=======
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+>>>>>>> f15f568 (first commit)
 </head>
 
 <body>

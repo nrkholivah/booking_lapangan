@@ -12,7 +12,10 @@ class Bookings extends BaseController
     public function __construct()
     {
         $this->bookingModel = new BookingModel();
+<<<<<<< HEAD
     
+=======
+>>>>>>> f15f568 (first commit)
     }
 
     public function index()
@@ -48,8 +51,13 @@ class Bookings extends BaseController
         }
 
         $data = [
+<<<<<<< HEAD
             'payment_status' => 'approved',
             'booking_status' => 'approved', 
+=======
+            'payment_status' => 'Disetujui',
+            'booking_status' => 'Disetujui',
+>>>>>>> f15f568 (first commit)
             'admin_notes'    => $this->request->getPost('admin_notes'),
         ];
 
@@ -69,8 +77,13 @@ class Bookings extends BaseController
         }
 
         $data = [
+<<<<<<< HEAD
             'payment_status' => 'rejected',
             'booking_status' => 'rejected',
+=======
+            'payment_status' => 'Ditolak',
+            'booking_status' => 'Dibatalkan',
+>>>>>>> f15f568 (first commit)
             'admin_notes'    => $this->request->getPost('admin_notes'),
         ];
 
@@ -90,7 +103,7 @@ class Bookings extends BaseController
         }
 
         $data = [
-            'booking_status' => 'cancelled',
+            'booking_status' => 'Dibatalkan',
             'admin_notes'    => $this->request->getPost('admin_notes'),
         ];
 

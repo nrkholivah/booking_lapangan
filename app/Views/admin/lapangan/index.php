@@ -36,12 +36,18 @@
                                 <td><?= esc($row['name']) ?></td>
                                 <td>Rp<?= number_format($row['price_per_hour'], 0, ',', '.') ?></td>
                                 <td>
+<<<<<<< HEAD
                                     <?php if ($row['status'] == 'available'): ?>
                                         <span class="badge bg-success">Tersedia</span>
                                     <?php elseif ($row['status'] == 'maintenance'): ?>
+=======
+                                    <?php if ($row['status'] == 'Tersedia'): ?>
+                                        <span class="badge bg-success">Tersedia</span>
+                                    <?php elseif ($row['status'] == 'Perawatan'): ?>
+>>>>>>> f15f568 (first commit)
                                         <span class="badge bg-warning text-dark">Perawatan</span>
                                     <?php else: ?>
-                                        <span class="badge bg-danger">Tidak Tersedia</span>
+                                        <span class="badge bg-danger">Penuh</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>

@@ -37,7 +37,7 @@ class Lapangan extends BaseController
             'description'    => 'permit_empty|max_length[500]',
             'price_per_hour' => 'required|numeric|greater_than[0]',
             'image'          => 'if_exist|uploaded[image]|max_size[image,2048]|is_image[image]',
-            'status'         => 'required|in_list[available,maintenance,unavailable]',
+            'status'         => 'required|in_list[Tersedia,Perawatan]',
         ];
 
         if (! $this->validate($rules)) {
@@ -48,8 +48,13 @@ class Lapangan extends BaseController
         $file = $this->request->getFile('image');
         if ($file && $file->isValid() && ! $file->hasMoved()) {
             $imageName = $file->getRandomName();
+<<<<<<< HEAD
             $file->move(ROOTPATH . 'image/lapangan', $imageName); 
             $imageName = 'image/lapangan/' . $imageName; 
+=======
+            $file->move(ROOTPATH . 'public/uploads/lapangan', $imageName); 
+            $imageName = 'uploads/lapangan/' . $imageName; 
+>>>>>>> f15f568 (first commit)
         }
 
         $data = [
@@ -94,7 +99,7 @@ class Lapangan extends BaseController
             'description'    => 'permit_empty|max_length[500]',
             'price_per_hour' => 'required|numeric|greater_than[0]',
             'image'          => 'if_exist|uploaded[image]|max_size[image,2048]|is_image[image]',
-            'status'         => 'required|in_list[available,maintenance,unavailable]',
+            'status'         => 'required|in_list[Tersedia,Perawatan,Penuh]',
         ];
 
         if (! $this->validate($rules)) {
@@ -109,8 +114,13 @@ class Lapangan extends BaseController
                 unlink(ROOTPATH . 'public/' . $imageName);
             }
             $imageName = $file->getRandomName();
+<<<<<<< HEAD
             $file->move(ROOTPATH . 'image/lapangan', $imageName);
             $imageName = 'image/lapangan/' . $imageName; 
+=======
+            $file->move(ROOTPATH . 'public/uploads/lapangan', $imageName);
+            $imageName = 'uploads/lapangan/' . $imageName; 
+>>>>>>> f15f568 (first commit)
         }
 
         $data = [

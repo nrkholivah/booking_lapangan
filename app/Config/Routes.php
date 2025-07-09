@@ -11,11 +11,16 @@ use CodeIgniter\Router\RouteCollection;
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('User\Home'); // Controller default untuk user
 $routes->setDefaultMethod('index');
+<<<<<<< HEAD
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 
 $routes->setAutoRoute(true); // Untuk kemudahan development, bisa diubah false di produksi
 
+=======
+
+$routes->setAutoRoute(true);
+>>>>>>> f15f568 (first commit)
 $routes->get('/', 'User\Home::index', ['filter' => 'auth']); // Halaman utama, butuh login
 $routes->get('/lapangan/(:num)', 'User\Home::detail/$1', ['filter' => 'auth']); // Detail lapangan
 $routes->post('/booking/create', 'User\Booking::create', ['filter' => 'auth']); // Proses booking
@@ -29,7 +34,11 @@ $routes->get('/register', 'Auth::register');
 $routes->post('/register', 'Auth::attemptRegister');
 $routes->get('/logout', 'Auth::logout');
 
+<<<<<<< HEAD
 // Rute Admin (dilindungi oleh filter adminAuth)
+=======
+// Rute Admin 
+>>>>>>> f15f568 (first commit)
 $routes->group(
     'admin',
     ['filter' => 'adminAuth'],
@@ -54,6 +63,9 @@ $routes->group(
         // Laporan & Grafik
         $routes->get('reports', 'Admin\Reports::index');
         $routes->get('reports/download', 'Admin\Reports::download');
+<<<<<<< HEAD
 
+=======
+>>>>>>> f15f568 (first commit)
     }
 );

@@ -37,18 +37,29 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+<<<<<<< HEAD
         const lapanganNames = <?= $lapangan_names ?>; // Changed from fieldNames
         const bookingCounts = <?= $booking_counts ?>;
 
         const ctx = document.getElementById('lapanganUsageChart').getContext('2d'); // Changed from fieldUsageChart
+=======
+        const lapanganNames = <?= $lapangan_names ?>;
+        const bookingCounts = <?= $booking_counts ?>;
+
+        const ctx = document.getElementById('lapanganUsageChart').getContext('2d');
+>>>>>>> f15f568 (first commit)
         new Chart(ctx, {
-            type: 'bar', // Bisa diganti 'line', 'pie', dll.
+            type: 'line', // Bisa diganti 'line', 'pie', dll.
             data: {
+<<<<<<< HEAD
                 labels: lapanganNames, // Changed from fieldNames
+=======
+                labels: lapanganNames,
+>>>>>>> f15f568 (first commit)
                 datasets: [{
                     label: 'Jumlah Booking',
                     data: bookingCounts,
-                    backgroundColor: 'rgba(220, 53, 69, 0.7)', // Warna merah
+                    backgroundColor: 'rgba(220, 53, 69, 0.7)',
                     borderColor: 'rgba(220, 53, 69, 1)',
                     borderWidth: 1
                 }]

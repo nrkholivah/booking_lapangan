@@ -26,7 +26,11 @@ class Auth extends Controller
     public function attemptLogin()
     {
         $rules = [
+<<<<<<< HEAD
             'email'    => 'required|valid_email',
+=======
+            'email'    => 'required',
+>>>>>>> f15f568 (first commit)
             'password' => 'required',
         ];
 
@@ -72,7 +76,11 @@ class Auth extends Controller
     {
         $rules = [
             'username' => 'required',
+<<<<<<< HEAD
             'email'    => 'required|valid_email|is_unique[users.email]',
+=======
+            'email'    => 'required',
+>>>>>>> f15f568 (first commit)
             'password' => 'required',
             'pass_confirm' => 'required_with[password]|matches[password]',
         ];
@@ -84,8 +92,14 @@ class Auth extends Controller
         $data = [
             'username' => $this->request->getPost('username'),
             'email'    => $this->request->getPost('email'),
+<<<<<<< HEAD
             'password' => $this->request->getPost('password'),
             'role'     => 'user', // Default role adalah user
+=======
+            'no_hp'    => $this->request->getPost('no_hp'),
+            'password' => $this->request->getPost('password'),
+            'role'     => 'user',
+>>>>>>> f15f568 (first commit)
         ];
 
         if ($this->userModel->insert($data)) {

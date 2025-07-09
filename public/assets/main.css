@@ -1,39 +1,66 @@
-
 :root {
     --bs-red: #dc3545; 
+<<<<<<< HEAD
     --bs-red-rgb: 220,53,69;
     
+=======
+    --bs-red-rgb: 220, 53, 69;
+    --bs-success: #198754;
+    --bs-warning: #ffc107;
+    --bs-info: #0dcaf0;
+    --bs-primary: #0d6efd;
+>>>>>>> f15f568 (first commit)
 }
 
+/* ========== Backgrounds ========== */
 .bg-danger {
     background-color: var(--bs-red) !important;
 }
+.bg-success {
+    background-color: var(--bs-success) !important;
+}
+.bg-warning {
+    background-color: var(--bs-warning) !important;
+}
+.bg-info {
+    background-color: var(--bs-info) !important;
+}
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
 
+/* ========== Buttons ========== */
 .btn-danger {
     background-color: var(--bs-red);
     border-color: var(--bs-red);
 }
-
 .btn-danger:hover {
     background-color: #c82333; 
     border-color: #bd2130;
 }
 
+/* ========== Table Danger ========== */
 .table-danger th {
     background-color: var(--bs-red) !important;
     color: white !important;
 }
 
+/* ========== Active List Group ========== */
 .list-group-item.active.bg-danger {
     background-color: var(--bs-red) !important;
     border-color: var(--bs-red) !important;
 }
 
+<<<<<<< HEAD
 
+=======
+/* ========== Card Headers ========== */
+>>>>>>> f15f568 (first commit)
 .card-header.bg-danger {
     background-color: var(--bs-red) !important;
 }
 
+<<<<<<< HEAD
 
 .card.bg-primary {
     background-color: #0d6efd !important; 
@@ -49,12 +76,16 @@
 }
 
 
+=======
+/* ========== Text Utilities ========== */
+>>>>>>> f15f568 (first commit)
 .text-white {
     color: #fff !important;
 }
 .text-dark {
     color: #212529 !important;
 }
+<<<<<<< HEAD
 /* admin-report.css */
 
 .card-header.bg-danger {
@@ -100,3 +131,35 @@ canvas#lapanganUsageChart {
             background-color: #f44336;
             color: white;
         }
+=======
+
+/* ========== Badge Fix (Tambahan Penting!) ========== */
+.badge {
+    padding: 0.45em 0.65em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 0.35rem;
+    display: inline-block;
+    line-height: 1;
+}
+
+.badge.bg-danger {
+    background-color: var(--bs-red) !important;
+    color: #fff !important;
+}
+
+.badge.bg-success {
+    background-color: var(--bs-success) !important;
+    color: #fff !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--bs-warning) !important;
+    color: #212529 !important;
+}
+
+.badge.bg-info {
+    background-color: var(--bs-info) !important;
+    color: #000 !important;
+}
+>>>>>>> f15f568 (first commit)
